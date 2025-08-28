@@ -176,6 +176,7 @@ class Surreal_GAN_train:
         if not verbose:
             pbar = tqdm(total=self.opt.final_saving_epoch + 2000)  # type: ignore
         for epoch in range(1, self.opt.final_saving_epoch + 2001):  # type: ignore
+            losses = {'loss_recons': 0.0, 'loss_mono': 0.0}  # Initialize to avoid UnboundLocalError
             if not verbose:
                 pbar.update(1)
             # epoch_start_time = time.time()
@@ -306,7 +307,6 @@ class Surreal_GAN_train:
                 ]
                 if verbose:
                     self.print_log(result_f, res_str)
-        agreement_f.close()
         if verbose:
             result_f.close()
         if not verbose:
